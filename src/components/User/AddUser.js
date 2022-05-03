@@ -3,7 +3,7 @@ import Card from "../UI/Card";
 import classes from './AddUser.module.css';
 import Button from '../UI/Button';
 
-const AddUser = () => {
+const AddUser = props => {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredAge, setEnteredAge] = useState('');
 
@@ -24,6 +24,7 @@ const AddUser = () => {
       return;
     }
     console.log(enteredUsername, enteredAge);
+    props.addedUser([{id: Math.random().toString(), name:enteredUsername, age:enteredAge}]);
     setEnteredUsername('');
     setEnteredAge('');
   };
