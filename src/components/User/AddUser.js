@@ -12,23 +12,24 @@ const AddUser = (props) => {
 
   const errorHandler = () => {
     setError(null);
-  }
+  };
 
   const onAddUserHandler = (event) => {
     event.preventDefault();
     const enteredName = nameInputRef.current.value;
     const enteredUserAge = ageInputRef.current.value;
+
     if (enteredName.trim().length === 0 || enteredUserAge.trim().length === 0) {
       setError({
-        title: 'Invalid input',
-        message: 'Please enter a valid name and age (non-empty values).'
+        title: "Invalid input",
+        message: "Please enter a valid name and age (non-empty values).",
       });
       return;
     }
     if (+enteredUserAge < 0) {
       setError({
-        title: 'Invalid age',
-        message: 'Please enter a valid age (> 0).'
+        title: "Invalid age",
+        message: "Please enter a valid age (> 0).",
       });
       return;
     }
@@ -38,28 +39,29 @@ const AddUser = (props) => {
       name: enteredName,
       age: enteredUserAge,
     });
+
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
   };
 
   return (
     <Fragment>
-    {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}    
-    <Card className={classes.input}>
-      <form onSubmit={onAddUserHandler}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          ref={nameInputRef}
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
         />
-        <label htmlFor="age">Age(In Years)</label>
-        <input
-          id="age"
-          type="number"
-          ref={ageInputRef}
-        />
-        <Button type="submit">Add User</Button>
-      </form>
-    </Card>
+      )}
+      <Card className={classes.input}>
+        <form onSubmit={onAddUserHandler}>
+          <label htmlFor="username">Username</label>
+          <input id="username" type="text" ref={nameInputRef} />
+          <label htmlFor="age">Age(In Years)</label>
+          <input id="age" type="number" ref={ageInputRef} />
+          <Button type="submit">Add User</Button>
+        </form>
+      </Card>
     </Fragment>
   );
 };
